@@ -4,7 +4,7 @@ call plug#begin('~/.vim/plugged')
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'preservim/nerdtree'
 
@@ -20,7 +20,9 @@ Plug 'ludovicchabant/vim-gutentags'
 
 Plug 'dense-analysis/ale'
 
-" Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension'  }
+Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension'  }
+
+Plug 'ycm-core/YouCompleteMe'
 
 call plug#end()
 
@@ -37,9 +39,6 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 
-inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <silent><expr> <Tab> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
-inoremap <silent><expr> <Tab> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 
 " ctags settings
@@ -74,5 +73,23 @@ let g:ale_sign_error = ">>"
 highlight clear ALEWarning
 highlight clear ALEError
 
-" settings for LeaderF
-"let g:Lf_ShortcutF = '<C-p>'"
+let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
+let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
+
+"settings for ycm
+let g:ycm_add_preview_to_completeopt=0
+let g:ycm_show_diagnostics_ui=0
+let g:ycm_server_log_level='info'
+let g:ycm_min_num_identifier_candidate_chars=2
+let g:ycm_collect_identifiers_from_comments_and_strings=1
+let g:ycm_complete_in_strings=1
+let g:ycm_key_invoke_completion='<c-space>'
+set completeopt=menu,menuone
+
+
+let g:ycm_semantic_triggers={
+    \ 'c,cpp,python,java,go,erlang,perl':['re!\w{2}'],
+    \ 'cs,lua,javascript': ['re!\w{2}'],
+    \ }
+"settings for LeaderF
+let g:Lf_ShortcutF = '<C-p>'
